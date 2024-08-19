@@ -6,7 +6,7 @@ export default function Login() {
             <form>
                 <input type="text" placeholder="Username"></input>
                 <input type="password" placeholder="Password"></input>
-                <button type="submit"></button>
+                <button type="submit">Submit</button>
             </form>
         </main>
     )
