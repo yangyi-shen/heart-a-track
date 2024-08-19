@@ -1,6 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './components/App.jsx'
+import Home from './components/Home.jsx'
+import About from './components/About.jsx'
+import Login from './components/Login.jsx'
 
 // routing
 import {
@@ -11,7 +13,15 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <Home />
+  },
+  {
+    path: "/about",
+    element: <About />
+  },
+  {
+    path: "/login",
+    element: <Login />
   },
 ]);
 
