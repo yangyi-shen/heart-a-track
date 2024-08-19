@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import Home from './components/Home.jsx'
 import About from './components/About.jsx'
 import Login from './components/Login.jsx'
+import Register from './components/Register.jsx'
 
 // routing
 import {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/register",
+    element: <Register />
   },
 ]);
 
