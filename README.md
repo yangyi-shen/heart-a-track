@@ -5,7 +5,7 @@ A handy website to help you track your blood pressure!
 ## Planned webpages
 
 ### Standard
-- [ ] Main page
+- [ ] Home page
 - [ ] About page
 - [ ] Login/Register
 
