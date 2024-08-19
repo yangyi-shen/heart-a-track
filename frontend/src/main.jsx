@@ -27,6 +27,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <h2>Heart-A-Track ❤️</h2>
     <RouterProvider router={router} />
+    <footer>Copyright © Yang-Yi Shen 2024</footer>
   </StrictMode>,
 )
