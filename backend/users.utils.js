@@ -40,3 +40,5 @@ async function checkUser(username, password) {
     await sql.end();
     return exists;
 }
+
+export default { registerUser, loginUser }
