@@ -1,10 +1,13 @@
 import express from 'express'
+import cors from 'cors'
 
 import userUtils from './users.utils.js'
 import dataUtils from './data.utils.js'
 
 const app = express()
 const PORT = 6900
+
+app.use(cors())
 
 // AUTHENTICATION APIs
 app.post('/user/register', async (req, res) => {
