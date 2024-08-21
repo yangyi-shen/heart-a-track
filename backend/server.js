@@ -1,7 +1,7 @@
 import express from 'express'
 
-import userUtils from './users.utils'
-import dataUtils from './data.utils'
+import userUtils from './users.utils.js'
+import dataUtils from './data.utils.js'
 
 const app = express()
 const PORT = 6900

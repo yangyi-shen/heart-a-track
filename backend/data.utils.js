@@ -40,4 +40,4 @@ async function getRangeData(userId, start, end) {
     return response
 }
 
-export { writeData, getData }
+export default { writeData, getData }
