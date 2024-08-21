@@ -43,15 +43,17 @@ export default function Login() {
 
     return (
         <main>
-            <h1>Login page</h1>
-            <p>Please enter your information below:</p>
-            <form onSubmit={handleSubmit}>
-                <input ref={usernameRef} type="text" placeholder="Username"></input>
-                <input ref={passwordRef} type="password" placeholder="Password"></input>
-                <button type="submit">Submit</button>
+            <h1 className="mb-4 text-4xl font-extrabold text-zinc-950">Log in</h1>
+            <p className="mb-2 text-zinc-700">Please enter your information below:</p>
+            <form onSubmit={handleSubmit} className="flex flex-col">
+                <input className="py-1 px-2 border-x-2 border-t-2 border-zinc-200 rounded-t" ref={usernameRef} type="text" placeholder="Username"></input>
+                <input className="py-1 px-2 border-2 border-zinc-200 rounded-b"  ref={passwordRef} type="password" placeholder="Password"></input>
+                <div className="mt-3">
+                    <button type="submit" className="px-3 py-2 rounded text-zinc-50 font-bold bg-zinc-700 active:text-zinc-200">Submit</button>
+                </div>
             </form>
-            { error && <p style={{color: 'red'}}>ERROR: invalid credentials</p> }
-            <p>Do you need to <Link to="/register">register</Link> instead?</p>
+            { error && <p style={{color: 'red'}}>ERROR: username already in use</p> }
+            <p className="mt-4">Do you need to <Link to="/register">register</Link> instead?</p>
         </main>
     )
 }
