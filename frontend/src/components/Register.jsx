@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { useContext, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
 import userContext from '../context/userContext';
 import apiContext from "../context/apiContext";
 
@@ -11,6 +11,10 @@ export default function Register() {
 
     const usernameRef = useRef(null)
     const passwordRef = useRef(null)
+
+    const navigate = useNavigate()
+
+    const [error, setError] = useState(false)
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -31,9 +35,9 @@ export default function Register() {
 
         if (response) {
             userData.signedIn = true
+            navigate('/')
         } else {
-            // add error handling (api returns false) later
-            // probably show error message
+            setError(true)
         }
     }
 
@@ -46,6 +50,7 @@ export default function Register() {
                 <input ref={passwordRef} type="password" placeholder="Password"></input>
                 <button type="submit">Submit</button>
             </form>
+            { error && <p style={{color: 'red'}}>ERROR: username already in use</p> }
             <p>Do you need to <Link to="/login">login</Link> instead?</p>
         </main>
     )
