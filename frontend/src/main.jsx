@@ -36,11 +36,11 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <div className='p-5'>
-      <div className='flex align-center'>
+      <div className='flex align-center mb-6'>
         <h2 className='text-2xl font-extrabold tracking-tight text-zinc-800'>Heart-A-Track <i className='fa fa-heart fa-sm text-red-500'></i></h2>
       </div>
       <RouterProvider router={router} />
-      <footer className='text-zinc-400'>Copyright © Yang-Yi Shen 2024</footer>
+      <footer className='text-zinc-400 mt-10 text-center'>Copyright © Yang-Yi Shen 2024</footer>
     </div>
   </StrictMode>,
 )
