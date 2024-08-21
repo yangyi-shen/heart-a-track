@@ -29,12 +29,9 @@ async function getRangeData(start, end) {
     const ISOend = end.toISOString().replace('Z', '+00').replace('T', ' ');
 
     const response = await sql`
-        SELECT * FROM data WHERE created_at BETWEEN ${ISOstart} AND ${ISOend}
+        SELECT * FROM data WHERE created_at BETWEEN ${ISOend} AND ${ISOstart}
     `
 
     await sql.end();
     return response
 }
-const currentDate = new Date()
-const weekDate = new Date('05 October 2011 14:48 UTC');
-console.log(await getRangeData(currentDate, weekDate));
