@@ -8,6 +8,7 @@ const app = express()
 const PORT = 6900
 
 app.use(cors())
+app.use(express.json())
 
 // AUTHENTICATION APIs
 app.post('/user/register', async (req, res) => {
@@ -18,6 +19,7 @@ app.post('/user/register', async (req, res) => {
         await userUtils.registerUser(username, password)
         res.send(true)
     } catch (error) {
+        console.error(error)
         res.send(false)
     }
 })
@@ -30,6 +32,7 @@ app.post('/user/login', async (req, res) => {
         await userUtils.loginUser(username, password)
         res.send(true)
     } catch (error) {
+        console.error(error)
         res.send(false)
     }
 })
@@ -44,6 +47,7 @@ app.put('/data/write/:id', async (req, res) => {
         await dataUtils.writeData(userId, bp, hr)
         res.send(true)
     } catch (error) {
+        console.error(error)
         res.send(false)
     }
 })
@@ -56,6 +60,7 @@ app.get('/data/get/:id', async (req, res) => {
         const response = await dataUtils.getData(userId, range)
         res.send(response)
     } catch (error) {
+        console.error(error)
         res.send(false)
     }
 })
