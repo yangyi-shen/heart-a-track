@@ -7,7 +7,7 @@ const app = express()
 const PORT = 6900
 
 // AUTHENTICATION APIs
-app.post('/auth/register', async (req, res) => {
+app.post('/user/register', async (req, res) => {
     try {
         const username = req.body.username
         const password = req.body.password
@@ -19,7 +19,7 @@ app.post('/auth/register', async (req, res) => {
     }
 })
 
-app.post('/auth/login', async (req, res) => {
+app.post('/user/login', async (req, res) => {
     try {
         const username = req.body.username
         const password = req.body.password
