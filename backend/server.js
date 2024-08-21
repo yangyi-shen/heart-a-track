@@ -35,16 +35,23 @@ app.put('/data/write/:id', (req, res) => {
     // - userId
     // - bp
     // - hr
+    const userId = req.params.id
+    const bp = req.body.bp
+    const hr = req.body.hr
 
     // create new data entry
+    dataUtils.writeData(userId, bp, hr)
 })
 
 app.get('/data/get/:id', (req, res) => {
     // params:
     // - userId
     // - range
+    const userId = req.params.id
+    const range = req.query.range
 
     // return data for specified user and range
+    dataUtils.getData(userId, range)
 })
 
 app.listen(PORT, () => {
