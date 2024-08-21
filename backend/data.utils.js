@@ -39,3 +39,5 @@ async function getRangeData(userId, start, end) {
     await sql.end();
     return response
 }
+
+export { writeData, getData }
