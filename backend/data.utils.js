@@ -14,22 +14,26 @@ async function writeData(userId, bp, hr) {
 }
 
 async function getData(userId, range) {
-    switch(range) {
-        case 'week':
-
-        case 'month':
-
-        case 'year':
+    const startDate = new Date();
+    if (range == 'week') {
+        const endDate = new Date(startDate.getDate() - 7);
+        return await getRangeData(userId, startDate, endDate);
+    } else if (range == 'month') {
+        const endDate = new Date(startDate.getMonth() - 1);
+        return await getRangeData(userId, startDate, endDate);
+    } else if (range == 'year') {
+        const endDate = new Date(startDate.getFullYear() - 7);
+        return await getRangeData(userId, startDate, endDate);
     }
 }
 
-async function getRangeData(start, end) {
+async function getRangeData(userId, start, end) {
     const sql = postgres(connectionString)
     const ISOstart = start.toISOString().replace('Z', '+00').replace('T', ' ');
     const ISOend = end.toISOString().replace('Z', '+00').replace('T', ' ');
 
     const response = await sql`
-        SELECT * FROM data WHERE created_at BETWEEN ${ISOend} AND ${ISOstart}
+        SELECT * FROM data WHERE created_at BETWEEN ${ISOend} AND ${ISOstart} AND user_id = ${userId}
     `
 
     await sql.end();
