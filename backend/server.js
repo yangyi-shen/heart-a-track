@@ -7,51 +7,54 @@ const app = express()
 const PORT = 6900
 
 // AUTHENTICATION APIs
-app.post('/auth/register', (req, res) => {
-    // params: 
-    // - username
-    // - password
-    const username = req.body.username
-    const password = req.body.password
+app.post('/auth/register', async (req, res) => {
+    try {
+        const username = req.body.username
+        const password = req.body.password
 
-    // register new user
-    userUtils.registerUser(username, password)
+        await userUtils.registerUser(username, password)
+        res.send(true)
+    } catch (error) {
+        res.send(false)
+    }
 })
 
-app.post('/auth/login', (req, res) => {
-    // params: 
-    // - username
-    // - password
-    const username = req.body.username
-    const password = req.body.password
-
-    // validate provided credentials
-    userUtils.loginUser(username, password)
+app.post('/auth/login', async (req, res) => {
+    try {
+        const username = req.body.username
+        const password = req.body.password
+    
+        await userUtils.loginUser(username, password)
+        res.send(true)
+    } catch (error) {
+        res.send(false)
+    }
 })
 
 // DATA MANAGEMENT APIs
-app.put('/data/write/:id', (req, res) => {
-    // params: 
-    // - userId
-    // - bp
-    // - hr
-    const userId = req.params.id
-    const bp = req.body.bp
-    const hr = req.body.hr
-
-    // create new data entry
-    dataUtils.writeData(userId, bp, hr)
+app.put('/data/write/:id', async (req, res) => {
+    try {
+        const userId = req.params.id
+        const bp = req.body.bp
+        const hr = req.body.hr
+    
+        await dataUtils.writeData(userId, bp, hr)
+        res.send(true)
+    } catch (error) {
+        res.send(false)
+    }
 })
 
-app.get('/data/get/:id', (req, res) => {
-    // params:
-    // - userId
-    // - range
-    const userId = req.params.id
-    const range = req.query.range
+app.get('/data/get/:id', async (req, res) => {
+    try {
+        const userId = req.params.id
+        const range = req.query.range
 
-    // return data for specified user and range
-    dataUtils.getData(userId, range)
+        const response = await dataUtils.getData(userId, range)
+        res.send(response)
+    } catch (error) {
+        res.send(false)
+    }
 })
 
 app.listen(PORT, () => {
