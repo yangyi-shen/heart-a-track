@@ -35,7 +35,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <h2>Heart-A-Track ❤️</h2>
+    <div className='flex align-center'>
+      <h2 className='text-2xl font-extrabold tracking-tight text-zinc-800'>Heart-A-Track <i className='fa fa-heart fa-sm text-red-500'></i></h2>
+    </div>
     <RouterProvider router={router} />
     <footer>Copyright © Yang-Yi Shen 2024</footer>
   </StrictMode>,
