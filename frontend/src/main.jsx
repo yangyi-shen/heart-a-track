@@ -39,6 +39,6 @@ createRoot(document.getElementById('root')).render(
       <h2 className='text-2xl font-extrabold tracking-tight text-zinc-800'>Heart-A-Track <i className='fa fa-heart fa-sm text-red-500'></i></h2>
     </div>
     <RouterProvider router={router} />
-    <footer>Copyright © Yang-Yi Shen 2024</footer>
+    <footer className='text-zinc-400'>Copyright © Yang-Yi Shen 2024</footer>
   </StrictMode>,
 )
