@@ -53,7 +53,7 @@ export default function Login() {
                 </div>
             </form>
             { error && <p style={{color: 'red'}}>ERROR: username already in use</p> }
-            <p className="mt-4">Do you need to <Link to="/register">register</Link> instead?</p>
+            <p className="mt-4">Do you need to <Link to="/register" className="text-red-500 hover:underline">register</Link> instead?</p>
         </main>
     )
 }
