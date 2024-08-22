@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react"
+import { useContext, useRef, useState } from "react"
 import apiContext from "../context/apiContext";
 import userContext from "../context/userContext";
 
@@ -10,6 +10,8 @@ export default function Record() {
 
     const bloodPressureRef = useRef(null)
     const heartRateRef = useRef(null)
+
+    const [success, setSuccess] = useState(false)
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -31,9 +33,14 @@ export default function Record() {
         }).then(response => response.json())
 
         if (response) {
+            bloodPressureRef.current.value = null;
+            heartRateRef.current.value = null;
+
             userData.signedIn = true
+            setSuccess(true)
         } else {
-            setError(true)
+            console.error("ERROR: Something went wrong")
+            setSuccess(false)
         }
     }
 
@@ -42,12 +49,16 @@ export default function Record() {
             <h1 className="mb-4 text-4xl font-extrabold text-zinc-950">Add new measurements</h1>
             <p className="mb-2 text-zinc-700">Please fill out the statistics below:</p>
             <form onSubmit={handleSubmit} className="flex flex-col">
-                <input className="py-1 px-2 border-x-2 border-t-2 border-zinc-200 rounded-t" ref={bloodPressureRef} type="number" placeholder="Blood pressure"></input>
-                <input className="py-1 px-2 border-2 border-zinc-200 rounded-b"  ref={heartRateRef} type="number" placeholder="Heart rate"></input>
+                <label for="blood-pressure-input"><i className="text-zinc-600 fa fa-droplet fa-lg absolute mt-[1.10rem] ml-3"></i></label>
+                <input className="py-1 pr-2 pl-8 border-x-2 border-t-2 border-zinc-200 rounded-t" ref={bloodPressureRef} type="number" placeholder="Blood pressure"></input>
+                <label for="heart-rate-input"><i className="text-zinc-600 fa fa-heart-pulse fa-lg absolute mt-[1.10rem] ml-2.5"></i></label>
+                <input id="heart-rate-input" className="py-1 pr-2 pl-8 border-2 border-zinc-200 rounded-b" ref={heartRateRef} type="number" placeholder="Heart rate"></input>
+                {success && <p className="text-lime-500 mt-1">Submission successful!</p>}
                 <div className="mt-3">
                     <button type="submit" className="px-3 py-2 rounded text-zinc-50 font-bold bg-zinc-700 active:text-zinc-200">Record</button>
                 </div>
             </form>
+
         </main>
     )
 }
