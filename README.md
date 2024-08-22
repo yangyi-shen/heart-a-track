@@ -7,7 +7,7 @@ A handy website to help you track your blood pressure!
 ### Standard
 - [ ] Home page
 - [ ] About page
-- [ ] Login/Register
+- [x] Login/Register
 
 ### When logged in
 - [ ] Measure
