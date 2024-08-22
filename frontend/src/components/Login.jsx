@@ -46,6 +46,8 @@ export default function Login() {
             })
             navigate('/')
         } else {
+            usernameRef.current.value = null
+            passwordRef.current.value = null
             setError(true)
         }
     }

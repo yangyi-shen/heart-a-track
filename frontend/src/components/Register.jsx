@@ -46,6 +46,8 @@ export default function Register() {
             })
             navigate('/')
         } else {
+            usernameRef.current.value = null
+            passwordRef.current.value = null
             setError(true)
         }
     }
@@ -69,7 +71,7 @@ export default function Register() {
                     </button>
                 </div>
             </form>
-            {error && <p style={{ color: 'red' }}>ERROR: username already in use</p>}
+            {error && <p className="text-red-500 mt-1">ERROR: username already in use</p>}
             <p className="mt-4">Do you need to <Link to="/login" className="text-red-500 hover:underline">login</Link> instead?</p>
         </main>
     )
