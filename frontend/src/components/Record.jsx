@@ -20,7 +20,6 @@ export default function Record() {
     const heartRateRef = useRef(null)
 
     const [success, setSuccess] = useState(false)
-    const [error, setError] = useState(false)
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -47,11 +46,9 @@ export default function Record() {
 
             userData.signedIn = true
             setSuccess(true)
-            setError(false)
         } else {
             console.error("ERROR: Something went wrong")
             setSuccess(false)
-            setError(true)
         }
     }
 
@@ -61,11 +58,10 @@ export default function Record() {
             <p className="mb-2 text-zinc-700">Please fill out the statistics below:</p>
             <form onSubmit={handleSubmit} className="flex flex-col">
                 <label><i className="text-zinc-600 fa fa-droplet fa-lg absolute mt-[1.10rem] ml-3"></i></label>
-                <input className="py-1 pr-2 pl-8 border-x-2 border-t-2 border-zinc-200 rounded-t" ref={bloodPressureRef} type="number" placeholder="Blood pressure"></input>
+                <input min={0} className="py-1 pr-2 pl-8 border-x-2 border-t-2 border-zinc-200 rounded-t" ref={bloodPressureRef} type="number" placeholder="Blood pressure"></input>
                 <label><i className="text-zinc-600 fa fa-heart-pulse fa-lg absolute mt-[1.10rem] ml-2.5"></i></label>
-                <input id="heart-rate-input" className="py-1 pr-2 pl-8 border-2 border-zinc-200 rounded-b" ref={heartRateRef} type="number" placeholder="Heart rate"></input>
+                <input min={0} id="heart-rate-input" className="py-1 pr-2 pl-8 border-2 border-zinc-200 rounded-b" ref={heartRateRef} type="number" placeholder="Heart rate"></input>
                 {success && <p className="text-lime-500 mt-1">Submission successful!</p>}
-                {error && <p className="text-red-500 mt-1">ERROR: username already in use</p>}
                 <div className="mt-3">
                     <button type="submit" className="px-3 py-2 rounded text-zinc-50 font-bold bg-zinc-700 active:text-zinc-200">Record</button>
                 </div>
