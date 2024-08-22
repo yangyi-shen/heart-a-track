@@ -7,7 +7,7 @@ export default function Login() {
     const apiData = useContext(apiContext)
     const apiUrl = apiData.url
 
-    const userData = useContext(userContext)
+    const { userData, setUserData } = useContext(userContext)
 
     const usernameRef = useRef(null)
     const passwordRef = useRef(null)
@@ -34,7 +34,10 @@ export default function Login() {
         }).then(response => response.json())
 
         if (response) {
-            userData.signedIn = true
+            setUserData({
+                signedIn: true,
+                data: response
+            })
             navigate('/')
         } else {
             setError(true)
