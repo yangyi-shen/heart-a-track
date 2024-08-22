@@ -1,11 +1,40 @@
-import { useRef } from "react"
+import { useContext, useRef } from "react"
+import apiContext from "../context/apiContext";
+import userContext from "../context/userContext";
 
 export default function Record() {
+    const apiData = useContext(apiContext)
+    const apiUrl = apiData.url
+
+    const { userData, setUserData } = useContext(userContext)
+
     const bloodPressureRef = useRef(null)
     const heartRateRef = useRef(null)
 
-    function handleSubmit() {
-        
+    async function handleSubmit(event) {
+        event.preventDefault()
+
+        const bloodPressure = bloodPressureRef.current.value
+        const heartRate = heartRateRef.current.value
+
+        const userId = userData.data.id
+
+        const response = await fetch(`${apiUrl}/data/write/${userId}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                bp: bloodPressure,
+                hr: heartRate
+            })
+        }).then(response => response.json())
+
+        if (response) {
+            userData.signedIn = true
+        } else {
+            setError(true)
+        }
     }
 
     return (
