@@ -16,8 +16,8 @@ app.post('/user/register', async (req, res) => {
         const username = req.body.username
         const password = req.body.password
 
-        await userUtils.registerUser(username, password)
-        res.send(true)
+        const user = await userUtils.registerUser(username, password)
+        res.send(user)
     } catch (error) {
         console.error(error)
         res.send(false)
@@ -29,8 +29,8 @@ app.post('/user/login', async (req, res) => {
         const username = req.body.username
         const password = req.body.password
     
-        await userUtils.loginUser(username, password)
-        res.send(true)
+        const user = await userUtils.loginUser(username, password)
+        res.send(user)
     } catch (error) {
         console.error(error)
         res.send(false)
