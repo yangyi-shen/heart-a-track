@@ -61,6 +61,7 @@ export default function Login() {
                 <input id="username-input" className="py-1 pr-2 pl-8 border-x-2 border-t-2 border-zinc-200 rounded-t" ref={usernameRef} type="text" placeholder="Username"></input>
                 <label><i className="text-zinc-600 fa fa-key fa-lg absolute mt-[1.10rem] ml-2"></i></label>
                 <input id="password-input" className="py-1 pr-2 pl-8 border-2 border-zinc-200 rounded-b" ref={passwordRef} type="password" placeholder="Password"></input>
+                {error && <p className="text-red-500 mt-1">ERROR: invalid credentials</p>}
                 <div className="mt-3">
                     <button type="submit" className="flex px-3 py-2 rounded text-zinc-50 font-bold bg-zinc-700 active:text-zinc-200">
                         {loading ? <svg className="animate-spin -ml-0.5 mr-1.5 mt-px h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -71,7 +72,6 @@ export default function Login() {
                     </button>
                 </div>
             </form>
-            {error && <p className="text-red-500 mt-1">ERROR: invalid credentials</p>}
             <p className="mt-4">Do you need to <Link to="/register" className="text-red-500 hover:underline">register</Link> instead?</p>
         </main>
     )
