@@ -14,6 +14,7 @@ export default function Register() {
 
     const navigate = useNavigate()
 
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
 
     async function handleSubmit(event) {
@@ -21,6 +22,8 @@ export default function Register() {
 
         const username = usernameRef.current.value
         const password = passwordRef.current.value
+
+        setLoading(true)
 
         const response = await fetch(`${apiUrl}/user/register`, {
             method: "POST",
@@ -31,7 +34,10 @@ export default function Register() {
                 username: username,
                 password: password
             })
-        }).then(response => response.json())
+        })
+            .then(response => response.json())
+        
+        setLoading(false)
 
         if (response) {
             setUserData({
@@ -49,12 +55,18 @@ export default function Register() {
             <h1 className="mb-4 text-4xl font-extrabold text-zinc-950">Create a new account</h1>
             <p className="mb-2 text-zinc-700">Please enter your information below:</p>
             <form onSubmit={handleSubmit} className="flex flex-col">
-                <label for="username-input"><i className="text-zinc-600 fa fa-signature fa-lg absolute mt-[1.10rem] ml-1.5"></i></label>
+                <label><i className="text-zinc-600 fa fa-signature fa-lg absolute mt-[1.10rem] ml-1.5"></i></label>
                 <input id="username-input" className="py-1 pr-2 pl-8 border-x-2 border-t-2 border-zinc-200 rounded-t" ref={usernameRef} type="text" placeholder="Username"></input>
-                <label for="username-input"><i className="text-zinc-600 fa fa-key fa-lg absolute mt-[1.10rem] ml-2"></i></label>
+                <label><i className="text-zinc-600 fa fa-key fa-lg absolute mt-[1.10rem] ml-2"></i></label>
                 <input id="password-input" className="py-1 pr-2 pl-8 border-2 border-zinc-200 rounded-b" ref={passwordRef} type="password" placeholder="Password"></input>
                 <div className="mt-3">
-                    <button type="submit" className="px-3 py-2 rounded text-zinc-50 font-bold bg-zinc-700 active:text-zinc-200">Submit</button>
+                    <button type="submit" className="flex px-3 py-2 rounded text-zinc-50 font-bold bg-zinc-700 active:text-zinc-200">
+                        {loading ? <svg className="animate-spin -ml-0.5 mr-1.5 mt-px h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg> : ''}
+                        Submit
+                    </button>
                 </div>
             </form>
             {error && <p style={{ color: 'red' }}>ERROR: username already in use</p>}
