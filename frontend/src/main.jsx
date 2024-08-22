@@ -1,7 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { Link } from 'react-router-dom'
 
 import './main.css'
+
+import Layout from './components/Layout.jsx'
 
 import Home from './components/Home.jsx'
 import About from './components/About.jsx'
@@ -16,31 +19,19 @@ import {
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />
-  },
-  {
-    path: "/about",
-    element: <About />
-  },
-  {
-    path: "/login",
-    element: <Login />
-  },
-  {
-    path: "/register",
-    element: <Register />
-  },
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'about', element: <About /> },
+      { path: 'login', element: <Login />},
+      { path: 'register', element: <Register />}
+    ]
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <div className='p-5'>
-      <div className='flex align-center mb-6'>
-        <h2 className='text-2xl font-extrabold tracking-tight text-zinc-800'>Heart-A-Track <i className='fa fa-heart fa-sm text-red-500'></i></h2>
-      </div>
-      <RouterProvider router={router} />
-      <footer className='text-zinc-400 mt-10 text-center'>Copyright © Yang-Yi Shen 2024</footer>
-    </div>
+    <RouterProvider router={router} />
   </StrictMode>,
 )
