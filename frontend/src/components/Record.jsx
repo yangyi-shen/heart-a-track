@@ -19,6 +19,7 @@ export default function Record() {
     const bloodPressureRef = useRef(null)
     const heartRateRef = useRef(null)
 
+    const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
 
     async function handleSubmit(event) {
@@ -28,6 +29,8 @@ export default function Record() {
         const heartRate = heartRateRef.current.value
 
         const userId = userData.data.id
+
+        setLoading(true)
 
         const response = await fetch(`${apiUrl}/data/write/${userId}`, {
             method: "PUT",
@@ -39,6 +42,8 @@ export default function Record() {
                 hr: heartRate
             })
         }).then(response => response.json())
+
+        setLoading(false)
 
         if (response) {
             bloodPressureRef.current.value = null;
@@ -63,7 +68,13 @@ export default function Record() {
                 <input min={0} id="heart-rate-input" className="py-1 pr-2 pl-8 border-2 border-zinc-200 rounded-b" ref={heartRateRef} type="number" placeholder="Heart rate"></input>
                 {success && <p className="text-lime-500 mt-1">Submission successful!</p>}
                 <div className="mt-3">
-                    <button type="submit" className="px-3 py-2 rounded text-zinc-50 font-bold bg-zinc-700 active:text-zinc-200">Record</button>
+                    <button type="submit" className="flex px-3 py-2 rounded text-zinc-50 font-bold bg-zinc-700 active:text-zinc-200">
+                        {loading ? <svg className="animate-spin -ml-0.5 mr-1.5 mt-px h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg> : ''}
+                        Record
+                    </button>
                 </div>
             </form>
 
