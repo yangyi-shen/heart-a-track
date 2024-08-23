@@ -1,5 +1,4 @@
 import { useContext, useRef, useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom";
 import apiContext from "../context/apiContext";
 import userContext from "../context/userContext";
 
@@ -8,13 +7,6 @@ export default function Record() {
     const apiUrl = apiData.url
 
     const { userData, setUserData } = useContext(userContext)
-
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (userData.data == undefined) {
-            navigate('/login')
-        }
-    })
 
     const bloodPressureRef = useRef(null)
     const heartRateRef = useRef(null)
