@@ -8,6 +8,8 @@ import Home from './components/Home.jsx'
 import About from './components/About.jsx'
 import Login from './components/Login.jsx'
 import Register from './components/Register.jsx'
+
+import RequireLogin from './components/RequireLogin.jsx'
 import Record from './components/Record.jsx'
 
 // routing
@@ -25,7 +27,12 @@ const router = createBrowserRouter([
       { path: 'about', element: <About /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
-      { path: 'record', element: <Record /> }
+      { 
+        element: <RequireLogin />, 
+        children: [
+          { path: 'record', element: <Record /> },
+        ]
+      }
     ]
   }
 ]);
