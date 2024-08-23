@@ -4,14 +4,14 @@ import userContext from './context/userContext.js'
 
 import Layout from './components/Layout.jsx'
 
-import Home from './components/Home.jsx'
-import About from './components/About.jsx'
-import Login from './components/Login.jsx'
-import Register from './components/Register.jsx'
+import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
+import Login from './pages/Login.jsx'
+import Register from './pages/Register.jsx'
 
 import RequireLogin from './components/RequireLogin.jsx'
-import PastData from './components/PastData.jsx'
-import Record from './components/Record.jsx'
+import PastData from './pages/PastData.jsx'
+import Record from './pages/Record.jsx'
 
 // routing
 import {
