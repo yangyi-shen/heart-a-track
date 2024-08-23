@@ -8,6 +8,7 @@ export default function Main() {
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/login">Login</Link></li>
                 <li><Link to="/record">Record</Link></li>
+                <li><Link to='/pastdata'>Past Data</Link></li>
             </ul>
         </main>
     )
