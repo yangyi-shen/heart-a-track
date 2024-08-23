@@ -10,6 +10,7 @@ import Login from './components/Login.jsx'
 import Register from './components/Register.jsx'
 
 import RequireLogin from './components/RequireLogin.jsx'
+import PastData from './components/PastData.jsx'
 import Record from './components/Record.jsx'
 
 // routing
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { 
         element: <RequireLogin />, 
         children: [
+          { path: 'pastdata', element: <PastData /> },
           { path: 'record', element: <Record /> },
         ]
       }
