@@ -30,15 +30,23 @@ export default function PastData() {
 
     // Prepare data for the chart
     const chartData = {
-        labels: data.map(item => new Date(item.created_at)),  // Use actual Date objects for time-based x-axis
+        labels: data.map(item => new Date(item.created_at)),
         datasets: [
             {
-                label: 'Blood Pressure (systolic)',
-                data: data.map(item => parseInt(item.bp)), // Assuming bp is in the "120/80" format
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                label: 'Blood Pressure',
+                data: data.map(item => parseInt(item.bp)),
+                borderColor: '#fca5a5',
+                backgroundColor: '#fca5a5',
                 fill: false,
-                tension: 0.1
+                tension: 0
+            },
+            {
+                label: 'Heart Rate',
+                data: data.map(item => parseInt(item.hr)),
+                borderColor: '#ef4444',
+                backgroundColor: '#ef4444',
+                fill: false,
+                tension: 0
             }
         ]
     };
@@ -46,17 +54,16 @@ export default function PastData() {
     const options = {
         scales: {
             x: {
-                type: 'time',  // Set the x-axis to use a time scale
+                type: 'time',  // Keep the time scale
                 time: {
-                    unit: 'day',  // Display the data by day intervals
-                    tooltipFormat: 'P',  // Format for tooltips (e.g., "MM/DD/YYYY")
+                    unit: 'hour',  // Set unit to 'hour' for hourly intervals
                     displayFormats: {
-                        day: 'MMM d',  // Display format for the ticks (e.g., "Aug 28")
+                        hour: 'MMM dd, HH:mm'  // Format to display date and time (e.g., Aug 28, 14:00)
                     }
                 },
                 title: {
                     display: true,
-                    text: 'Date'
+                    text: 'Time'
                 }
             },
             y: {
@@ -73,7 +80,7 @@ export default function PastData() {
     return (
         <main>
             <h1 className="mb-4 text-4xl font-extrabold text-zinc-950">Previously recorded data</h1>
-            <Line data={chartData} options={options} height={400} width={800} />
+            <Line data={chartData} options={options} height={200} width={600} />
         </main>
     );
 }
