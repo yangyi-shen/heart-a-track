@@ -63,8 +63,7 @@ export default function PastData() {
                     }
                 },
                 title: {
-                    display: true,
-                    text: 'Time'
+                    display: false
                 }
             },
             y: {
@@ -81,7 +80,7 @@ export default function PastData() {
     return (
         <main className="mx-auto max-w-screen-md" style={{ height: '300px' }}>
             <h1 className="mb-4 text-4xl font-extrabold text-zinc-950">Previously recorded data</h1>
-            <Line data={chartData} options={options} />
+            <Line className="mb-8" data={chartData} options={options} />
         </main>
     );
 }
