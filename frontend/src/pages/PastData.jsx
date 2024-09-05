@@ -52,13 +52,14 @@ export default function PastData() {
     };
 
     const options = {
+        maintainAspectRatio: false,
         scales: {
             x: {
                 type: 'time',  // Keep the time scale
                 time: {
                     unit: 'hour',  // Set unit to 'hour' for hourly intervals
                     displayFormats: {
-                        hour: 'MMM dd, HH:mm'  // Format to display date and time (e.g., Aug 28, 14:00)
+                        hour: 'MMM dd'
                     }
                 },
                 title: {
@@ -78,9 +79,9 @@ export default function PastData() {
     };
 
     return (
-        <main>
+        <main className="mx-auto max-w-screen-md" style={{ height: '300px' }}>
             <h1 className="mb-4 text-4xl font-extrabold text-zinc-950">Previously recorded data</h1>
-            <Line data={chartData} options={options} height={200} width={600} />
+            <Line data={chartData} options={options} />
         </main>
     );
 }
