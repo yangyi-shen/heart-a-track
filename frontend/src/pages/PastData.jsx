@@ -1,48 +1,69 @@
 import { useContext, useState, useEffect } from "react";
-import apiContext from '../context/apiContext'
-import userContext from '../context/userContext'
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+
+import apiContext from '../context/apiContext';
+import userContext from '../context/userContext';
+
+// Register the necessary components for Chart.js
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export default function PastData() {
-    const apiData = useContext(apiContext)
-    const apiUrl = apiData.url
+    const apiData = useContext(apiContext);
+    const apiUrl = apiData.url;
 
-    const { userData, setUserData } = useContext(userContext)
-    const userId = userData.data.id
+    const { userData } = useContext(userContext);
+    const userId = userData.data.id;
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         async function getData() {
-            const response = await fetch(`${apiUrl}/data/get/${userId}?range=week`)
-            .then(response => response.json())
-    
-            setData(response)
+            const response = await fetch(`${apiUrl}/data/get/${userId}?range=week`);
+            const result = await response.json();
+            setData(result);
         }
 
-        getData()
-    }, [])
+        getData();
+    }, [apiUrl, userId]);
+
+    // Prepare data for the chart
+    const chartData = {
+        labels: data.map(item => new Date(item.created_at).toLocaleDateString()),
+        datasets: [
+            {
+                label: 'Blood Pressure',
+                data: data.map(item => parseInt(item.bp, 10)), // Assuming bp is "120/80" format
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: false,
+                tension: 0.1
+            }
+        ]
+    };
+
+    const options = {
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Date'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Blood Pressure (systolic)'
+                },
+                beginAtZero: false
+            }
+        }
+    };
 
     return (
         <main>
             <h1 className="mb-4 text-4xl font-extrabold text-zinc-950">Previously recorded data</h1>
-            <table className="table-fixed w-full">
-                <thead>
-                    <tr>
-                        <th className="text-left text-zinc-800">Blood Pressure</th>
-                        <th className="text-left text-zinc-800">Heart Rate</th>
-                        <th className="text-left text-zinc-800">Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    { data.map(item => 
-                        <tr className="border-b-2 text-zinc-600" key={item.id}>
-                            <td className="text-right pr-4">{item.bp}</td>
-                            <td className="text-right pr-4">{item.hr}</td>
-                            <td>{item.created_at}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+            <Line data={chartData} options={options} height={200} width={600} />
         </main>
-    )
+    );
 }
